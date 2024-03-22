@@ -1,0 +1,9 @@
+copiamatriz
+copiavetor 
+alocamatriz
+alocavetor
+destroimatriz
+destroivetor
+lesl
+imprimesl
+destroitudo 
