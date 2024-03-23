@@ -7,7 +7,7 @@
 int main() {
 	double **m, *v; 
 	double **mx, *v;
-	int n, it = 0; 
+	int *n, it = 0; 
 	
 	le_sl(&m,&v,&n);
 	criacopia_matriz(m,mx,n);
