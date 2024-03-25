@@ -1,68 +1,73 @@
 #include "sl.h"
 
-void aloca_matriz(double **m,int n) {
+double** aloca_matriz(int n) {
+	double** m;
 
-	m = (double **)malloc(n * sizeof(double *));
+	m = malloc(sizeof(double *) * n);
 	for(int i = 0; i < n; i++){
-		m[i] = (double *)malloc(n * sizeof(double));
+		m[i] = malloc(sizeof(double) * n);
 	}
+	return m;
 }
 
-void aloca_vetor(double *v,int n) {
+double* aloca_vetor(int n) {
+	double* v;
 
 	v = malloc(sizeof(double) * n);
+	return v;
 }
 
-void le_sl(double **m,double *v,int *n) {
+void le_sl(double ***m,double **v,int *n) {
 
 	scanf("%d",n);
 	getchar();
 	
-	aloca_matriz(m,*n);
-	aloca_vetor(v,*n);
+	*m = aloca_matriz(*n);	
 
-	if(&m == NULL)
-		return;
+	*v = aloca_vetor(*n);
+
 	for (int i = 0; i < *n ; i++) {
-		if(&m[i] != NULL){
-			for (int j = 0; j < *n; j++) {
-				scanf("%lf",&m[i][j]);
-			}
+		for (int j = 0; j < *n; j++) {
+			scanf("%lf",&((*m)[i][j]));
 		}
-		scanf("%lf",&v[i]);
+		scanf("%lf",&((*v)[i]));
+		getchar();
 	}
 }
 
-void criacopia_matriz(double **m,double **mx,int n) {
+void criacopia_matriz(double **m,double ***mx,int n) {
 
-	aloca_matriz(mx,n);
+	*mx = aloca_matriz(n);
 	for (int i = 0; i < n; i++){
 		for (int j = 0; j < n; j++)
-			mx[i][j] = m[i][j];
+			(*mx)[i][j] = m[i][j];
 	}
 }
 
-void criacopia_vetor(double *v,double *vx,int n) {
+void criacopia_vetor(double *v,double **vx,int n) {
 
-	aloca_vetor(vx,n);
+	*vx = aloca_vetor(n);
 	for (int i = 0; i < n; i++){
-			vx[i] = v[i];
+			(*vx)[i] = v[i];
 	}
 }
 
 void imprimeresultado(double *resultado,double *residuo,double tempo,int n) {
 
-	printf("%lf ms",tempo);
+	printf("tempo: %lf ms\n",tempo);
 	
+	printf("resultado:\n");
 	for(int i = 0; i < n; i++){
 		printf("%lf ",resultado[i]);
 	}
 
 	printf("\n");
 
+	printf("residuo:\n");
 	for(int i = 0; i < n; i++){
 		printf("%lf ",residuo[i]);
 	}
+	printf("\n");
 }
 
 void destroi_matriz(double **m,int n){
@@ -94,13 +99,13 @@ void main(){
 	int n;
 
 
-	le_sl(m,v,&n);
-	criacopia_matriz(m,mx,n);
-	criacopia_vetor(v,vx,n);
-	criacopia_vetor(v,residuo,n);
-	criacopia_vetor(v,resultado,n);
+	le_sl(&m,&v,&n);
+	criacopia_matriz(m,&mx,n);
+	criacopia_vetor(v,&vx,n);
+	criacopia_vetor(v,&residuo,n);
+	criacopia_vetor(v,&resultado,n);
 	
-	//imprimir copia
+	printf("VETOR:\n");
 	for (int i = 0; i < n; i++){
 		for (int j = 0; j < n; j++)
 			printf("%lf ",mx[i][j]);

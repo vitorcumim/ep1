@@ -4,15 +4,15 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-void aloca_matriz(double **m, int n);
+double** aloca_matriz(int n);
 
-void aloca_vetor(double *v, int n);
+double* aloca_vetor(int n);
 
-void le_sl(double **m, double *v, int *n);
+void le_sl(double ***m, double **v, int *n);
 
-void criacopia_matriz(double **m, double **mx, int n);
+void criacopia_matriz(double **m, double ***mx, int n);
 
-void criacopia_vetor(double *v, double *vx, int n);
+void criacopia_vetor(double *v, double **vx, int n);
 
 void imprimeresultado(double *resultado, double *residuo, double tempo, int n);
 
