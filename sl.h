@@ -22,4 +22,6 @@ void destroi_vetor(double *v, int n);
 
 void destroi_tudo(double **m, double **mx, double *v, double *vx, double *residuo, double *resultado, int n);
 
+void imprime_matriz(double **m,int n); //debug excluir dps
+
 #endif

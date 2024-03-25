@@ -54,16 +54,14 @@ void criacopia_vetor(double *v,double **vx,int n) {
 
 void imprimeresultado(double *resultado,double *residuo,double tempo,int n) {
 
-	printf("tempo: %lf ms\n",tempo);
+	printf("%lf ms\n",tempo);
 	
-	printf("resultado:\n");
 	for(int i = 0; i < n; i++){
 		printf("%lf ",resultado[i]);
 	}
 
 	printf("\n");
 
-	printf("residuo:\n");
 	for(int i = 0; i < n; i++){
 		printf("%lf ",residuo[i]);
 	}
@@ -92,26 +90,9 @@ void destroi_tudo(double **m,double **mx,double *v,double *vx,double *residuo,do
 	destroi_vetor(residuo,n);
 	destroi_vetor(resultado,n);
 }
-
-void main(){
-	double **m, **mx;
-	double *v, *vx, *residuo, *resultado;
-	int n;
-
-
-	le_sl(&m,&v,&n);
-	criacopia_matriz(m,&mx,n);
-	criacopia_vetor(v,&vx,n);
-	criacopia_vetor(v,&residuo,n);
-	criacopia_vetor(v,&resultado,n);
-	
-	printf("VETOR:\n");
-	for (int i = 0; i < n; i++){
-		for (int j = 0; j < n; j++)
-			printf("%lf ",mx[i][j]);
-		printf("\n");
-	}
-	
-	imprimeresultado(vx,v,0,n);
-	destroi_tudo(m,mx,v,vx,residuo,resultado,n);
+void imprime_matriz(double **m,int n){
+	printf("matriz:\n");
+		for (int i = 0; i < n; i++){
+			for (int j = 0; j < n; j++)
+				printf("%lf ",m[i][j]);}
 }
