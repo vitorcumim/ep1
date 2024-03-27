@@ -6,9 +6,7 @@
 
 void retrosub(double **m,double *v,double **resultado,int n);
 
-int pivoteamento(double **m,int n);
-
-void triangulariza(double ***m,double **v,int n);
+void eliminacao_gauss(double ***m,double **v,int n);
 
 void eg(double **m,double *v,double **resultado,double **residuo,int n);
 

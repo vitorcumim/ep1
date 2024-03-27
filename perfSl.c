@@ -13,7 +13,7 @@ int main() {
 	criacopia_matriz(m,&mx,n);
 	criacopia_vetor(v,&vx,n);
 	//calcular tempo
-	eg(mx,vx,resultado,residuo,n);
+	eg(mx,vx,&resultado,&residuo,n);
 	//retorna tempo
 	printf("EG clássico:\n");
 	imprimeresultado(resultado,residuo,tempo,n);

@@ -1,0 +1,1 @@
+-perguntar dos erros de operações(divizão por zero ,overflow,underflow,cancelamento subtrativo)
