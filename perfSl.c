@@ -5,45 +5,40 @@
 #include "utils.h"
 
 int main() {
-	double **m, **mx; 
-	double *v, *vx, *resultado, *residuo;
+	double **m;
+	double *v;
 	int *n, it = 0; 
 	
-	le_sl(&m,&v,&n);
+	le_sl(&m,&v,&n);										// Lê o sitema linear.
 	
-	criacopia_sl(m,&mx,v,&vx,n);							// Faz uma copia do sistema linear (m,v) no sistema linear auxiliar (mx,vx).
-	//ALOCAR OS VETORES resultado e residuo;(podemos alocar dentro da EG);
-	//calcular tempo
-	eg(mx,vx,&resultado,&residuo,n);
-	//retorna tempo
-	printf("EG clássico:\n");
-	imprimeresultado(resultado,residuo,tempo,n);
-	destroi_sl(mx,vx,n); 									// Libera a memória usada pelo sistema linear auxiliar.
+	eg(m,v,n);												// Executa a eliminação de gauss para o sistema linear.
 
-	criacopia_sl(m,&mx,v,&vx,n);							// Faz uma copia do sistema linear (m,v) no sistema linear auxiliar (mx,vx).
+	
+
+	criacopia_sl(m,&mx,v,&vx,n);							
 	//calcular tempo
-	gs(mx,vx,resultado,residuo,n,it);
+	gs(mx,vx,resultado,residuo,n,it);						//NAO IMPLEMENTADO
 	//retornar tempo
 	printf("GS clássico  [ %d iterações ]:\n",it);
 	imprimeresultado(resultado,residuo,tempo,n);
-	destroi_sl(mx,vx,n); 									// Libera a memória usada pelo sistema linear auxiliar.
+	destroi_sl(mx,vx,n); 									
 	
-	criacopia_sl(m,&mx,v,&vx,n);							// Faz uma copia do sistema linear (m,v) no sistema linear auxiliar (mx,vx).
-	//calcular tempo
-	eg3(mx,vx,resultado,residuo,n);
-	//retornar tempo
-	printf("EG 3-diagonal:\n");
-	imprimeresultado(resultado,residuo,tempo,n);
-	destroi_sl(mx,vx,n); 									// Libera a memória usada pelo sistema linear auxiliar.
 
-	criacopia_sl(m,&mx,v,&vx,n);							// Faz uma copia do sistema linear (m,v) no sistema linear auxiliar (mx,vx).
+
+
+	eg3d(m,v,n);											// Executa a eliminação de gauss para uma matriz tridiagonal.
+	
+
+
+
+	criacopia_sl(m,&mx,v,&vx,n);							
 	//calcular tempo
 	gs3(mx,vx,resultado,residuo,n,it);
 	//retornar tempo
-	printf("GS 3-diagonal [ %d iterações ]:\n",it);
+	printf("GS 3-diagonal [ %d iterações ]:\n",it);			//NAO IMPLEMENTADO
 	imprimeresultado(resultado,residuo,tempo,n);
 
-	destroitudo(m,mx,v,vx,residuo,resultado,n);         	// Libera toda memória antes de finalizar o programa.
+	destroitudo(m,mx,v,vx,residuo,resultado,n);         	
 
 	return 0;
 }

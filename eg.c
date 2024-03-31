@@ -1,7 +1,7 @@
 #include "sl.h"
 #include "eg.h"
 
-// Realiza a retrosubstituição em um vetor triangularizado.
+// Realiza a retrosubstituição em uma matriz triangularizada.
 void retrosub(double **m, double *v, double *resultado, int n) {
 	
 	for (int i = n-1; i >= 0; --i) {
@@ -60,30 +60,34 @@ void triangulariza(double **m, double *v, int n) {
 }
 
 // Função principal utilizada na main(perfSl). Triangulariza a matriz, em seguida faz a retrosubstituição.
-void eg(double **m, double *v, double *resultado, double *residuo, int n) {
+void eg(double **m, double *v, int n) {
+	double **mx; 
+	double *vx, *resultado, *residuo;
+	double tempo = 0.0;
 
-	triangulariza(m,v,n);
-	retrosub(m,v,resultado,n);
+	resultado = aloca_vetor(n);								// Aloca memória para o vetor de resultados.
+	residuo = aloca_vetor(n);								// Aloca memória para o vetor de resíduos.
+	memset(residuo,0,n*sizeof(double));						// Preenche o vetor de reíduos com zeros.(somente na eliminação de gauss).
+
+	criacopia_sl(m,&mx,v,&vx,n);							// Faz uma copia do sistema linear (m,v) no sistema linear auxiliar (mx,vx).
+	//tempo inicio
+	triangulariza(mx,vx,n);
+	retrosub(mx,vx,resultado,n);
+	//tempo fim
+	printf("EG clássico:\n");
+	imprimeresultado(resultado,residuo,tempo,n);			// Imprime os resultados.
+	destroi_tudo(mx,vx,resultado,residuo,n);				// Libera toda memória utilizada.
 }
 
 /*int main() {
-	double **m, *v ,tempo = 0.0; 
-	double **mx, *vx ,*resultado ,*residuo;
-	int n, it = 0; 
+	double **m;
+	double *v;
+	int n; 
 	
 	le_sl(&m,&v,&n);
-	criacopia_sl(m,&mx,v,&vx,n);
 	
-	resultado = aloca_vetor(n);
-	residuo = aloca_vetor(n);
-	memset(residuo,0,n*sizeof(double));
+	eg(m,v,n);
 	
-	//calcular tempo
-	eg(mx,vx,resultado,residuo,n);
-	//retorna tempo
-	
-	printf("EG clássico:\n");
-	imprimeresultado(resultado,residuo,tempo,n);
-	destroi_tudo(m,mx,v,vx,residuo,resultado,n);
+	destroi_sl(m,v,n);
 	return 0;
 }*/

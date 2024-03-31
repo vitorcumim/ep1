@@ -31,8 +31,8 @@ void destroi_matriz(double **m, int n); //DEBUG
 // Libera a memória usada por um sistema linear (uma matriz e um vetor). 
 void destroi_sl(double **m, double *v, int n); 
 
-// Libera toda a memória utilizada durante o programa para finalizar.
-void destroi_tudo(double **m, double **mx, double *v, double *vx, double *residuo, double *resultado, int n);
+// Libera toda a memória utilizada para cada método.
+void destroi_tudo(double **m, double *v, double *residuo, double *resultado, int n);
 
 // Imprime uma matriz (DEBUG).
 void imprime_matriz(double **m, int n); //DEBUG

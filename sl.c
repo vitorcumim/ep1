@@ -111,11 +111,10 @@ void destroi_sl(double **m, double *v, int n) {
 	free(v);
 }
 
-// Libera toda a memória utilizada durante o programa para finalizar.
-void destroi_tudo(double **m, double **mx, double *v, double *vx, double *residuo, double *resultado, int n) {
+// Libera toda a memória utilizada para cada método.
+void destroi_tudo(double **m, double *v, double *residuo, double *resultado, int n) {
 
 	destroi_sl(m,v,n);
-	destroi_sl(mx,vx,n);
 	destroi_vetor(residuo,n);
 	destroi_vetor(resultado,n);
 }
@@ -150,5 +149,6 @@ void imprime_matriz(double **m, int n) {
 	}
 	
 	imprimeresultado(vx,v,0,n);
-	destroi_tudo(m,mx,v,vx,residuo,resultado,n);
+	destroi_sl(mx,vx,n);
+	destroi_tudo(m,v,residuo,resultado,n);
 }*/
