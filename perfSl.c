@@ -5,50 +5,45 @@
 #include "utils.h"
 
 int main() {
-	double **m, *v; 
-	double **mx, *v;
+	double **m, **mx; 
+	double *v, *vx, *resultado, *residuo;
 	int *n, it = 0; 
 	
 	le_sl(&m,&v,&n);
-	criacopia_matriz(m,&mx,n);
-	criacopia_vetor(v,&vx,n);
+	
+	criacopia_sl(m,&mx,v,&vx,n);							// Faz uma copia do sistema linear (m,v) no sistema linear auxiliar (mx,vx).
+	//ALOCAR OS VETORES resultado e residuo;(podemos alocar dentro da EG);
 	//calcular tempo
 	eg(mx,vx,&resultado,&residuo,n);
 	//retorna tempo
 	printf("EG clássico:\n");
 	imprimeresultado(resultado,residuo,tempo,n);
-	destroi_matriz(mx,n);
-	destroi_vetor(vx, n);
+	destroi_sl(mx,vx,n); 									// Libera a memória usada pelo sistema linear auxiliar.
 
-	criacopia_matriz(m,&mx,n);
-	criacopia_vetor(v,&vx,n);
+	criacopia_sl(m,&mx,v,&vx,n);							// Faz uma copia do sistema linear (m,v) no sistema linear auxiliar (mx,vx).
 	//calcular tempo
 	gs(mx,vx,resultado,residuo,n,it);
 	//retornar tempo
 	printf("GS clássico  [ %d iterações ]:\n",it);
 	imprimeresultado(resultado,residuo,tempo,n);
-	destroi_matriz(mx,n);
-	destroi_vetor(vx, n);
+	destroi_sl(mx,vx,n); 									// Libera a memória usada pelo sistema linear auxiliar.
 	
-	criacopia_matriz(m,&mx,n);
-	criacopia_vetor(v,&vx,n);
+	criacopia_sl(m,&mx,v,&vx,n);							// Faz uma copia do sistema linear (m,v) no sistema linear auxiliar (mx,vx).
 	//calcular tempo
 	eg3(mx,vx,resultado,residuo,n);
 	//retornar tempo
 	printf("EG 3-diagonal:\n");
 	imprimeresultado(resultado,residuo,tempo,n);
-	destroi_matriz(mx,n);
-	destroi_vetor(vx, n);
+	destroi_sl(mx,vx,n); 									// Libera a memória usada pelo sistema linear auxiliar.
 
-	criacopia_matriz(m,&mx,n);
-	criacopia_vetor(v,&vx,n);
+	criacopia_sl(m,&mx,v,&vx,n);							// Faz uma copia do sistema linear (m,v) no sistema linear auxiliar (mx,vx).
 	//calcular tempo
 	gs3(mx,vx,resultado,residuo,n,it);
 	//retornar tempo
 	printf("GS 3-diagonal [ %d iterações ]:\n",it);
 	imprimeresultado(resultado,residuo,tempo,n);
 
-	destroitudo(m,mx,v,vx,residuo,resultado,n);
+	destroitudo(m,mx,v,vx,residuo,resultado,n);         	// Libera toda memória antes de finalizar o programa.
 
 	return 0;
 }

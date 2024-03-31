@@ -1,1 +1,3 @@
 -perguntar dos erros de operações(divizão por zero ,overflow,underflow,cancelamento subtrativo)
+-perguntar se é necessário realizar as contas de resíduo para a eliminação de gaus ou pode só fazer um memset com zeros no vetor de residuos
+-perguntar sobre os ponteiros
