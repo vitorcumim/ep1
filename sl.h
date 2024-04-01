@@ -11,6 +11,9 @@ double **aloca_matriz(int n);
 void le_sl(double ***m, double **v, int *n);
 
 // Copia o vetor v para o vetor vx (DEBUG).
+void copia_vetor(double *v,double *vx,int n);
+
+// Aloca e copia o vetor v para o vetor vx (DEBUG).
 void criacopia_vetor(double *v, double **vx, int n); //DEBUG
 
 // Copia a matriz m para a matriz mx (DEBUG).
@@ -23,7 +26,7 @@ void criacopia_sl(double **m, double ***mx, double *v, double **vx, int n);
 void imprimeresultado(double *resultado, double *residuo, double tempo, int n);
 
 // Libera a memória usada por um vetor (DEBUG).
-void destroi_vetor(double *v, int n); //DEBUG
+void destroi_vetor(double *v); //DEBUG
 
 // Libera a memória usada por uma matriz (DEBUG).
 void destroi_matriz(double **m, int n); //DEBUG

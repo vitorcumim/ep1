@@ -38,12 +38,17 @@ void le_sl(double ***m, double **v, int *n) {
 }
 
 // Copia o vetor v para o vetor vx (DEBUG).
+void copia_vetor(double *v,double *vx,int n) {
+		for (int i = 0; i < n; i++){
+			vx[i] = v[i];
+	}
+}
+
+// Aloca e copia o vetor v para o vetor vx (DEBUG).
 void criacopia_vetor(double *v, double **vx, int n) {
 	*vx = aloca_vetor(n);
 
-	for (int i = 0; i < n; i++){
-			(*vx)[i] = v[i];
-	}
+	copia_vetor(v,*vx,n);
 }
 
 // Copia a matriz m para a matriz mx (DEBUG).
@@ -87,7 +92,7 @@ void imprimeresultado(double *resultado, double *residuo, double tempo, int n) {
 }
 
 // Libera a memória usada por um vetor (DEBUG).
-void destroi_vetor(double *v, int n) {
+void destroi_vetor(double *v) {
 
 	free(v);
 }
@@ -115,8 +120,8 @@ void destroi_sl(double **m, double *v, int n) {
 void destroi_tudo(double **m, double *v, double *residuo, double *resultado, int n) {
 
 	destroi_sl(m,v,n);
-	destroi_vetor(residuo,n);
-	destroi_vetor(resultado,n);
+	destroi_vetor(residuo);
+	destroi_vetor(resultado);
 }
 
 // Imprime uma matriz (DEBUG).

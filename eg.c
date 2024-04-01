@@ -1,4 +1,3 @@
-#include "sl.h"
 #include "eg.h"
 
 // Realiza a retrosubstituição em uma matriz triangularizada.
