@@ -51,7 +51,7 @@ void criacopia_vetor(double *v, double **vx, int n) {
 	copia_vetor(v,*vx,n);
 }
 
-// Copia a matriz m para a matriz mx (DEBUG).
+// Aloca e copia a matriz m para a matriz mx (DEBUG).
 void criacopia_matriz(double **m, double ***mx, int n) {
 	*mx = aloca_matriz(n);
 
@@ -61,7 +61,7 @@ void criacopia_matriz(double **m, double ***mx, int n) {
 	}
 }
 
-// Copia o sistema linear (m,v) para o sistema linear (mx,vx).
+// Aloca e copia o sistema linear (m,v) para o sistema linear (mx,vx).
 void criacopia_sl(double **m, double ***mx, double *v, double **vx, int n) {
 	
 	*mx = aloca_matriz(n);

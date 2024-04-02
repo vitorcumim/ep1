@@ -1,9 +1,11 @@
-#include <math.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
+#ifndef __GS_H__
+#define __GS_H__
+
 #include "sl.h"
+#include "utils.h"
 #define TOL 0.0001
 
 // Função principal utilizada na main(perfSl). 
 void gs(double **m, double *v, int n);
+
+#endif // __GS_H__

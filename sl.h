@@ -1,5 +1,10 @@
+#ifndef __SL_H__
+#define __SL_H__
+
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
+#include "utils.h"
 
 // Aloca espaço na memória para um vetor com tamanho n.
 double *aloca_vetor(int n);
@@ -16,10 +21,10 @@ void copia_vetor(double *v,double *vx,int n);
 // Aloca e copia o vetor v para o vetor vx (DEBUG).
 void criacopia_vetor(double *v, double **vx, int n); //DEBUG
 
-// Copia a matriz m para a matriz mx (DEBUG).
+// Aloca e copia a matriz m para a matriz mx (DEBUG).
 void criacopia_matriz(double **m, double ***mx, int n); //DEBUG
 
-// Copia o sistema linear (m,v) para o sistema linear (mx,vx).
+// Aloca e copia o sistema linear (m,v) para o sistema linear (mx,vx).
 void criacopia_sl(double **m, double ***mx, double *v, double **vx, int n);
 
 // Imprime os vetores resultado, resíduo e o tempo.
@@ -39,3 +44,5 @@ void destroi_tudo(double **m, double *v, double *residuo, double *resultado, int
 
 // Imprime uma matriz (DEBUG).
 void imprime_matriz(double **m, int n); //DEBUG
+
+#endif // __SL_H__

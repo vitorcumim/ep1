@@ -69,10 +69,10 @@ void eg(double **m, double *v, int n) {
 	memset(residuo,0,n*sizeof(double));						// Preenche o vetor de reíduos com zeros.(somente na eliminação de gauss).
 
 	criacopia_sl(m,&mx,v,&vx,n);							// Faz uma copia do sistema linear (m,v) no sistema linear auxiliar (mx,vx).
-	//tempo inicio
+	tempo = timestamp();
 	triangulariza(mx,vx,n);
 	retrosub(mx,vx,resultado,n);
-	//tempo fim
+	tempo = timestamp() - tempo;
 	printf("EG clássico:\n");
 	imprimeresultado(resultado,residuo,tempo,n);			// Imprime os resultados.
 	destroi_tudo(mx,vx,resultado,residuo,n);				// Libera toda memória utilizada.

@@ -1,4 +1,3 @@
-#include "sl.h"
 #include "eg3d.h"
 
 // Realiza a retrosubstituição na "matriz"(vetores) tridiagonal.
@@ -47,10 +46,10 @@ void eg3d(double **m, double *v, int n) {
 	memset(residuo,0,n*sizeof(double));						// Preenche o vetor de reíduos com zeros.(somente na eliminação de gauss).
 
 	gera_vetores(m,a,d,c,n);								// Transforma a matriz tridiagonal em três vetores.
-	//tempo inicio
+	tempo = timestamp();
 	triangulariza(d,a,c,v,n);
 	retrosub(d,c,v,resultado,n);
-	//tempo fim
+	tempo = timestamp() - tempo;
 	printf("EG 3-diagonal:\n");
 	imprimeresultado(resultado,residuo,tempo,n);
 	destroi_vetor(a,n-1);										// Libera toda a memória usada.			
@@ -60,7 +59,7 @@ void eg3d(double **m, double *v, int n) {
 	destroi_vetor(resultado,n);
 }
 
-int main() {
+/*int main() {
 	double **m;
 	double *v;
 	int n;
@@ -71,4 +70,4 @@ int main() {
 
 	destroi_sl(m,v,n);
 	return 0;
-}
+}*/
