@@ -27,6 +27,9 @@ void criacopia_matriz(double **m, double ***mx, int n); //DEBUG
 // Aloca e copia o sistema linear (m,v) para o sistema linear (mx,vx).
 void criacopia_sl(double **m, double ***mx, double *v, double **vx, int n);
 
+//Calcula resíduo baseado na formula residuo = m * resultado - v
+void calculaResiduo(double **m,double *v,double *resultado,double *residuo,int n);
+
 // Imprime os vetores resultado, resíduo e o tempo.
 void imprimeresultado(double *resultado, double *residuo, double tempo, int n);
 

@@ -33,7 +33,7 @@ void gaussSeidel(double **m, double *v, double *resultado, uint n, int *it) {
 			resultado[i] = (v[i] - s) / m[i][i];
 		}
 		erro = calculaErro(resultado,ex_resultado,n);
-		printf("ERRO:%lf\n",erro);
+		printf("ERRO:%lf\n",erro); 			//debug
 		(*it) ++;
 	}
 	
@@ -52,6 +52,7 @@ void gs(double **m, double *v, int n) {
 
 	tempo = timestamp();
 	gaussSeidel(m,v,resultado,n,&it);
+	calculaResiduo(m,v,resultado,residuo,n);
 	tempo = timestamp() - tempo;
 	printf("GS clássico  [ %d iterações ]:\n",it);
 	imprimeresultado(resultado,residuo,tempo,n);
@@ -59,7 +60,7 @@ void gs(double **m, double *v, int n) {
 	destroi_vetor(resultado);
 }
 
-/*int main() {
+int main() {
 	double **m;
 	double *v;
 	int n; 
@@ -70,4 +71,4 @@ void gs(double **m, double *v, int n) {
 	
 	destroi_sl(m,v,n);
 	return 0;
-}*/
+}

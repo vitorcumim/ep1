@@ -77,6 +77,16 @@ void criacopia_sl(double **m, double ***mx, double *v, double **vx, int n) {
 	}
 }
 
+//Calcula resíduo baseado na formula residuo = m * resultado - v
+void calculaResiduo(double **m,double *v,double *resultado,double *residuo,int n) {
+
+	for(int i = 0; i < n ; i++) {
+		for(int j = 0; j < n ; j++)
+			residuo[i] += m[i][j] * resultado[j];
+		residuo[i] -= v[i];
+	}
+}
+
 // Imprime os vetores resultado, resíduo e o tempo.
 void imprimeresultado(double *resultado, double *residuo, double tempo, int n) {
 

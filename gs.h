@@ -3,7 +3,7 @@
 
 #include "sl.h"
 #include "utils.h"
-#define TOL 0.0001
+#define TOL 1e-9
 
 // Função principal utilizada na main(perfSl). 
 void gs(double **m, double *v, int n);

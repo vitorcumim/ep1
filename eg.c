@@ -72,13 +72,14 @@ void eg(double **m, double *v, int n) {
 	tempo = timestamp();
 	triangulariza(mx,vx,n);
 	retrosub(mx,vx,resultado,n);
+	calculaResiduo(m,v,resultado,residuo,n);
 	tempo = timestamp() - tempo;
 	printf("EG clássico:\n");
 	imprimeresultado(resultado,residuo,tempo,n);			// Imprime os resultados.
 	destroi_tudo(mx,vx,resultado,residuo,n);				// Libera toda memória utilizada.
 }
 
-/*int main() {
+int main() {
 	double **m;
 	double *v;
 	int n; 
@@ -89,4 +90,4 @@ void eg(double **m, double *v, int n) {
 	
 	destroi_sl(m,v,n);
 	return 0;
-}*/
+}
