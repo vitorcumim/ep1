@@ -1,27 +1,40 @@
-# PROGRAMA
-    PROG = perfEG
+CFLAGS = -Wall -O0 -g -lm # flags de compilacao 
 
-# Compilador
-    CC     = gcc
-    CFLAGS = 
-    LFLAGS = -lm
+CC = gcc
 
-# Lista de arquivos para distribuição
-DISTFILES = *.c *.h LEIAME* Makefile
-DISTDIR = `basename ${PWD}`
+# regra default
+	all = perfSl
 
-.PHONY: all clean purge dist
+# arquivos-objeto
+	objects = perfSl.o sl.o eg.o gs.o eg3d.o gs3d.o utils.o
+	fonte = ! -name '*.c' ! -name 'Makefile' ! -name 'README' ! -name '*.h'    
+     
+perfSl: $(objects)
+	$(CC) $(objects) -o $(all)
 
-clean:
-	@echo "Limpando sujeira ..."
-	@rm -f *~ *.bak
+sl.o: sl.c
+	$(CC) -c $(CFLAGS) sl.c
 
-purge:  clean
-	@echo "Limpando tudo ..."
-	@rm -f $(PROG) *.o core a.out $(DISTDIR) $(DISTDIR).tar
+eg.o: eg.c
+	$(CC) -c $(CFLAGS) eg.c
 
-dist: purge
-	@echo "Gerando arquivo de distribuição ($(DISTDIR).tar) ..."
-	@ln -s . $(DISTDIR)
-	@tar -cvf $(DISTDIR).tar $(addprefix ./$(DISTDIR)/, $(DISTFILES))
-	@rm -f $(DISTDIR)
+gs.o: gs.c
+	$(CC) -c $(CFLAGS) gs.c
+
+eg3d.o: eg3d.c
+	$(CC) -c $(CFLAGS) eg3d.c
+
+gs3d.o: gs3d.c
+	$(CC) -c $(CFLAGS) gs3d.c
+
+utils.o: utils.c
+	$(CC) -c $(CFLAGS) utils.c
+
+perfSl.o: perfSl.c
+	$(CC) -c $(CFLAGS) perfSl.c
+
+clean:                # Remove todos os arquivos temporários (.o) e o executável beale
+	rm -f $(all) $(objects)
+
+purge: clean          # Remove tudo o que não for o código-fonte original
+	find . -type f $(fonte) -delete

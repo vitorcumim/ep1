@@ -1,3 +1,8 @@
+//	Nome: Rafael Urbanek Laurentino
+// 	GRR: 20224381
+// 	Nome: Vitor Lorenzo Cumim
+// 	GRR: 20224757
+
 #include "sl.h"
 
 // Aloca espaço na memória para um vetor com tamanho n.
@@ -19,7 +24,7 @@ double **aloca_matriz(int n) {
 	return m;
 }
 
-// Lê um sistema linear. Uma matrix n*n e um vetor n. 
+// Lê um sistema linear. Uma matrix(m) n*n, e um vetor(v) de tamanho n. 
 void le_sl(double ***m, double **v, int *n) {
 
 	scanf("%d",n);
@@ -37,7 +42,7 @@ void le_sl(double ***m, double **v, int *n) {
 	}
 }
 
-// Copia o vetor v para o vetor vx (DEBUG).
+// Copia o vetor v para o vetor vx.
 void copia_vetor(double *v,double *vx,int n) {
 		for (int i = 0; i < n; i++){
 			vx[i] = v[i];
@@ -77,14 +82,41 @@ void criacopia_sl(double **m, double ***mx, double *v, double **vx, int n) {
 	}
 }
 
-//Calcula resíduo baseado na formula residuo = m * resultado - v
-void calculaResiduo(double **m,double *v,double *resultado,double *residuo,int n) {
+// Calcula resíduo baseado na formula residuo = m * resultado - v.
+void calculaResiduo(double **m, double *v, double *resultado, double *residuo, int n) {
 
-	for(int i = 0; i < n ; i++) {
-		for(int j = 0; j < n ; j++)
+	for (int i = 0; i < n ; i++) {
+		for (int j = 0; j < n ; j++)
 			residuo[i] += m[i][j] * resultado[j];
 		residuo[i] -= v[i];
 	}
+}
+
+// Coloca as três diagonais da matriz tridiagonal em vetores.
+void gera_vetores3d(double **m, double *a, double *d, double *c, int n) {
+
+    for (int i = 0; i < n; i++)							// A diagonal principal está na diagonal 0
+        d[i] = m[i][i];
+
+    for (int i = 0; i < n-1; i++)					 	// A primeira diagonal superior está na diagonal 1
+        c[i] = m[i][i+1];
+
+    for (int i = 0; i < n-1; i++)						 // A primeira diagonal inferior está na diagonal -1
+        a[i] = m[i+1][i];
+}
+
+// Função responsável por calcular o erro aproximado.
+double calculaErro(double *resultado, double *ex_resultado, int n) {
+	double diff, maior = 0.0;
+	
+	for (int i = 0; i < n; i++) {							// Encontra o maior erro aproximado.
+		diff = ABS(resultado[i] - ex_resultado[i]);
+		if (maior < diff)
+			maior = diff;
+	}
+
+	copia_vetor(resultado,ex_resultado,n);					// Atualiza o vetor de resultados (k-1).
+	return maior;
 }
 
 // Imprime os vetores resultado, resíduo e o tempo.

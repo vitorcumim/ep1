@@ -1,24 +1,13 @@
+//	Nome: Rafael Urbanek Laurentino
+// 	GRR: 20224381
+// 	Nome: Vitor Lorenzo Cumim
+// 	GRR: 20224757
+
 #include "gs.h"
 
-double calculaErro(double *resultado, double *ex_resultado, int n) {
-	double *diff, maior;
-
-	maior = 0.0;
-	diff = aloca_vetor(n);
-
-	for (int i = 0; i < n; i++) {
-		diff[i] = ABS(resultado[i] - ex_resultado[i]);
-		if (maior < diff[i])
-			maior = diff[i];
-	}
-
-	copia_vetor(resultado,ex_resultado,n);
-	destroi_vetor(diff);
-	return maior;
-}
-
+// Função que executa o método de Gauss Seidel.
 void gaussSeidel(double **m, double *v, double *resultado, uint n, int *it) {
-	double erro = 1 + TOL, s, *ex_resultado;
+	double *ex_resultado, s, erro = 1 + TOL;
 	int j;
 
 	ex_resultado = aloca_vetor(n);
@@ -33,13 +22,13 @@ void gaussSeidel(double **m, double *v, double *resultado, uint n, int *it) {
 			resultado[i] = (v[i] - s) / m[i][i];
 		}
 		erro = calculaErro(resultado,ex_resultado,n);
-		printf("ERRO:%lf\n",erro); 			//debug
 		(*it) ++;
 	}
 	
 	destroi_vetor(ex_resultado);
 }
 
+// Função principal utilizada na main(perfSl) calcula os resultado utilizando o método de Gauss Seidel e imprime.
 void gs(double **m, double *v, int n) { 
 	double *resultado, *residuo;
 	double tempo;
@@ -47,20 +36,20 @@ void gs(double **m, double *v, int n) {
 
 	resultado = aloca_vetor(n);								// Aloca memória para o vetor de resultados.
 	residuo = aloca_vetor(n);								// Aloca memória para o vetor de resíduos.
-	memset(residuo,0,n*sizeof(double));
-	memset(resultado,0,n*sizeof(double));
+	memset(resultado,0,n*sizeof(double));					// Preenche o vetor de resultado com zeros.
+	memset(residuo,0,n*sizeof(double));						// Preenche o vetor de reíduos com zeros.
 
 	tempo = timestamp();
 	gaussSeidel(m,v,resultado,n,&it);
-	calculaResiduo(m,v,resultado,residuo,n);
 	tempo = timestamp() - tempo;
+	calculaResiduo(m,v,resultado,residuo,n);				// Calcula os resíduos.
 	printf("GS clássico  [ %d iterações ]:\n",it);
-	imprimeresultado(resultado,residuo,tempo,n);
-	destroi_vetor(residuo);
-	destroi_vetor(resultado);
+	imprimeresultado(resultado,residuo,tempo,n);			// Imprime os resultados.
+	destroi_vetor(residuo);									// Libera a memória usa por resíduo.
+	destroi_vetor(resultado);								// Libera a memória usa por resultado.
 }
 
-int main() {
+/*int main() {
 	double **m;
 	double *v;
 	int n; 
@@ -71,4 +60,4 @@ int main() {
 	
 	destroi_sl(m,v,n);
 	return 0;
-}
+}*/

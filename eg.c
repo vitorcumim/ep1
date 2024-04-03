@@ -1,3 +1,8 @@
+//	Nome: Rafael Urbanek Laurentino
+// 	GRR: 20224381
+// 	Nome: Vitor Lorenzo Cumim
+// 	GRR: 20224757
+
 #include "eg.h"
 
 // Realiza a retrosubstituição em uma matriz triangularizada.
@@ -17,7 +22,7 @@ unsigned int encontra_max(double **m, int i, int n) {
 	int linha = i;
 	
 	for (int k = i; k < n; k++) {		// percorre toda a coluna.
-		if (m[k][i] > max) {			// caso seja econtrado um numero maior que max ele o atualiza e guarda a linha de ocorrẽncia.
+		if (m[k][i] > max) {			// caso seja econtrado um numero maior que max ele o atualiza e guarda a linha de ocorrência.
 			max = m[k][i];				
 			linha = k;
 		}
@@ -26,7 +31,7 @@ unsigned int encontra_max(double **m, int i, int n) {
 }
 
 // Troca duas linha de uma matriz.
-void troca_linha(double **m, double *v, int i, unsigned int pivo, int n) {
+void troca_linha(double **m, double *v, int i, uint pivo, int n) {
 	double aux_m, aux_v;
 
 	for (int j = 0; j < n; j++) {
@@ -43,7 +48,7 @@ void troca_linha(double **m, double *v, int i, unsigned int pivo, int n) {
 void triangulariza(double **m, double *v, int n) {
 
 	for (int i = 0; i < n; ++i) {
-			unsigned int pivo = encontra_max(m,i,n);
+			uint pivo = encontra_max(m,i,n);
 			if(i != pivo)									// Pivoteamento.
 				troca_linha(m,v,i,pivo,n);
 
@@ -58,28 +63,29 @@ void triangulariza(double **m, double *v, int n) {
 		}	
 }
 
-// Função principal utilizada na main(perfSl). Triangulariza a matriz, em seguida faz a retrosubstituição.
+// Função principal utilizada na main(perfSl). Triangulariza a matriz, em seguida faz a retrosubstituição e imprime os resultados.
 void eg(double **m, double *v, int n) {
 	double **mx; 
 	double *vx, *resultado, *residuo;
-	double tempo = 0.0;
+	double tempo;
 
 	resultado = aloca_vetor(n);								// Aloca memória para o vetor de resultados.
 	residuo = aloca_vetor(n);								// Aloca memória para o vetor de resíduos.
-	memset(residuo,0,n*sizeof(double));						// Preenche o vetor de reíduos com zeros.(somente na eliminação de gauss).
+	memset(resultado,0,n*sizeof(double));					// Preenche o vetor de resultado com zeros.
+	memset(residuo,0,n*sizeof(double));						// Preenche o vetor de reíduos com zeros.
 
 	criacopia_sl(m,&mx,v,&vx,n);							// Faz uma copia do sistema linear (m,v) no sistema linear auxiliar (mx,vx).
 	tempo = timestamp();
 	triangulariza(mx,vx,n);
 	retrosub(mx,vx,resultado,n);
-	calculaResiduo(m,v,resultado,residuo,n);
 	tempo = timestamp() - tempo;
+	calculaResiduo(m,v,resultado,residuo,n);				// Calcula os resíduos
 	printf("EG clássico:\n");
 	imprimeresultado(resultado,residuo,tempo,n);			// Imprime os resultados.
 	destroi_tudo(mx,vx,resultado,residuo,n);				// Libera toda memória utilizada.
 }
 
-int main() {
+/*int main() {
 	double **m;
 	double *v;
 	int n; 
@@ -90,4 +96,4 @@ int main() {
 	
 	destroi_sl(m,v,n);
 	return 0;
-}
+}*/
