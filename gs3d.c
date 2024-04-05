@@ -4,6 +4,7 @@
 // 	GRR: 20224757
 
 #include "gs3d.h"
+#include <likwid.h>
 
 // Função que implementa o metódo de Gauss Seidel para uma matriz tridiagonal.
 void gaussSeidel3d(double *d, double *a, double *c, double *v, double *resultado, int n, int *it) {
@@ -12,7 +13,7 @@ void gaussSeidel3d(double *d, double *a, double *c, double *v, double *resultado
  	ex_resultado = aloca_vetor(n);
  	memset(ex_resultado,0,n*sizeof(double));
 
- 	while (erro > TOL) {
+ 	while (erro > TOL && (*it) < 50) {
  		resultado[0] = (v[0] - c[0] * resultado[1]) / d[0];
  		for (int i = 1; i < n-1; ++i)
  			resultado[i] = (v[i] - a[i-1] * resultado[i-1] - c[i] * resultado[i+1]) / d[i];
@@ -39,9 +40,11 @@ void gs3d(double **m, double *v, int n) {
 	memset(residuo,0,n*sizeof(double));						// Preenche o vetor de reíduos com zeros.
 
 	gera_vetores3d(m,a,d,c,n);								// Transforma a matriz tridiagonal em três vetores.
+    LIKWID_MARKER_START("GS_3_diagonal");
     tempo = timestamp();
     gaussSeidel3d(d,a,c,v,resultado,n,&it);
     tempo = timestamp() - tempo;
+    LIKWID_MARKER_STOP("GS_3_diagonal");
     calculaResiduo(m,v,resultado,residuo,n);
     printf("GS 3-diagonal [ %d iterações ]:\n",it);
     imprimeresultado(resultado,residuo,tempo,n);			// Imprime os resultados.

@@ -4,6 +4,7 @@
 // 	GRR: 20224757
 
 #include "eg.h"
+#include <likwid.h>
 
 // Realiza a retrosubstituição em uma matriz triangularizada.
 void retrosub(double **m, double *v, double *resultado, int n) {
@@ -75,10 +76,12 @@ void eg(double **m, double *v, int n) {
 	memset(residuo,0,n*sizeof(double));						// Preenche o vetor de reíduos com zeros.
 
 	criacopia_sl(m,&mx,v,&vx,n);							// Faz uma copia do sistema linear (m,v) no sistema linear auxiliar (mx,vx).
+	LIKWID_MARKER_START("EG_clássico");
 	tempo = timestamp();
 	triangulariza(mx,vx,n);
 	retrosub(mx,vx,resultado,n);
 	tempo = timestamp() - tempo;
+	LIKWID_MARKER_STOP("EG_clássico");
 	calculaResiduo(m,v,resultado,residuo,n);				// Calcula os resíduos
 	printf("EG clássico:\n");
 	imprimeresultado(resultado,residuo,tempo,n);			// Imprime os resultados.

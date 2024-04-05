@@ -1,3 +1,10 @@
+/*	Nome: Rafael Urbanek Laurentino
+*	GRR: 20224381
+*	Nome: Vitor Lorenzo Cumim
+*	GRR: 20224757 
+*/
+
+#include <likwid.h>
 #include "sl.h"
 #include "eg.h"
 #include "gs.h"
@@ -5,21 +12,25 @@
 #include "gs3d.h"
 
 int main() {
-	double **m;
+	double **m;						// Define duas variáveis, uma matriz(m) e um vetor(v) para compor um sistema linear.
 	double *v;
-	int n; 
+	int n; 							// Define uma variável para o grau so sitema;
 	
-	le_sl(&m,&v,&n);										// Lê o sitema linear.
-	
-	eg(m,v,n);												// Executa a eliminação de gauss para o sistema linear.
+	LIKWID_MARKER_INIT;
 
-	gs(m,v,n);												// Executa o método de gauss seidel para um sistema linear.
+	le_sl(&m,&v,&n);				// Passa por referência o sistema linear, aloca espaço na memória e lê logo em seguida.
 	
-	eg3d(m,v,n);											// Executa a eliminação de gauss para uma sistema tridiagonal.
-	
-	gs3d(m,v,n);											// Executa o método de gauss seidel para um sistema tridiagoal.
+	eg(m,v,n);						// Executa a eliminação de gauss para o sistema linear.
 
-	destroi_sl(m,v,n);         	
+	gs(m,v,n);						// Executa o método de gauss seidel para um sistema linear.
+	
+	eg3d(m,v,n);					// Executa a eliminação de gauss para uma sistema tridiagonal.
+	
+	gs3d(m,v,n);					// Executa o método de gauss seidel para um sistema tridiagoal.
+
+	destroi_sl(m,v,n);  			// Libera a memória usada pelo sistema linear lido.
+
+	LIKWID_MARKER_CLOSE;       	
 
 	return 0;
 }

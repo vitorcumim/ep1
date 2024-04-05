@@ -4,6 +4,7 @@
 // 	GRR: 20224757
 
 #include "gs.h"
+#include <likwid.h>
 
 // Função que executa o método de Gauss Seidel.
 void gaussSeidel(double **m, double *v, double *resultado, uint n, int *it) {
@@ -39,9 +40,11 @@ void gs(double **m, double *v, int n) {
 	memset(resultado,0,n*sizeof(double));					// Preenche o vetor de resultado com zeros.
 	memset(residuo,0,n*sizeof(double));						// Preenche o vetor de reíduos com zeros.
 
+	LIKWID_MARKER_START("GS_clássico");
 	tempo = timestamp();
 	gaussSeidel(m,v,resultado,n,&it);
 	tempo = timestamp() - tempo;
+	LIKWID_MARKER_STOP("GS_clássico");
 	calculaResiduo(m,v,resultado,residuo,n);				// Calcula os resíduos.
 	printf("GS clássico  [ %d iterações ]:\n",it);
 	imprimeresultado(resultado,residuo,tempo,n);			// Imprime os resultados.

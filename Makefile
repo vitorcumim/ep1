@@ -1,5 +1,9 @@
-CFLAGS = -Wall -O0 -g -lm # flags de compilacao 
+LIKWID = /home/soft/likwid
+LIKWID_FLAGS = -I$(LIKWID)/include
+LIKWID_LIB = -L${LIKWID}/lib -llikwid
 
+
+CFLAGS = -Wall -O0 -DLIKWID_PERFMON $(LIKWID_FLAGS) -g # flags de compilacao 
 CC = gcc
 
 # regra default
@@ -10,7 +14,7 @@ CC = gcc
 	fonte = ! -name '*.c' ! -name 'Makefile' ! -name 'README' ! -name '*.h'    
      
 perfSl: $(objects)
-	$(CC) $(objects) -o $(all)
+	$(CC) $(objects) -o $(all) $(LIKWID_LIB) -lm
 
 sl.o: sl.c
 	$(CC) -c $(CFLAGS) sl.c

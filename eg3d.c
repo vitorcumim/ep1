@@ -4,6 +4,7 @@
 // 	GRR: 20224757
 
 #include "eg3d.h"
+#include <likwid.h>
 
 // Realiza a retrosubstituição na "matriz"(vetores) tridiagonal.
 void retrosub3d(double *d, double*c, double *v, double *resultado, int n) {
@@ -39,10 +40,12 @@ void eg3d(double **m, double *v, int n) {
 	memset(residuo,0,n*sizeof(double));						// Preenche o vetor de reíduos com zeros.
 
 	gera_vetores3d(m,a,d,c,n);								// Transforma a matriz tridiagonal em três vetores.
+	LIKWID_MARKER_START("EG_3_diagonal");
 	tempo = timestamp();
 	triangulariza3d(d,a,c,v,n);
 	retrosub3d(d,c,v,resultado,n);
 	tempo = timestamp() - tempo;
+	LIKWID_MARKER_STOP("EG_3_diagonal");
 	printf("EG 3-diagonal:\n");
 	imprimeresultado(resultado,residuo,tempo,n);			// Imprime os resultado.
 	destroi_vetor(a);										// Libera toda a memória usada.			
