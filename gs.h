@@ -1,7 +1,8 @@
-//	Nome: Rafael Urbanek Laurentino
-// 	GRR: 20224381
-// 	Nome: Vitor Lorenzo Cumim
-// 	GRR: 20224757
+/*	Nome: Rafael Urbanek Laurentino
+*	GRR: 20224381
+*	Nome: Vitor Lorenzo Cumim
+*	GRR: 20224757 
+*/
 
 #ifndef __GS_H__
 #define __GS_H__

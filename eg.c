@@ -1,7 +1,8 @@
-//	Nome: Rafael Urbanek Laurentino
-// 	GRR: 20224381
-// 	Nome: Vitor Lorenzo Cumim
-// 	GRR: 20224757
+/*	Nome: Rafael Urbanek Laurentino
+*	GRR: 20224381
+*	Nome: Vitor Lorenzo Cumim
+*	GRR: 20224757 
+*/
 
 #include "eg.h"
 #include <likwid.h>
@@ -31,7 +32,7 @@ unsigned int encontra_max(double **m, int i, int n) {
 	return linha;						// retorna a linha que deve ser trocada com a linha do pivo.
 }
 
-// Troca duas linha de uma matriz.
+// Troca a linha i pela linha pivo de uma matriz.
 void troca_linha(double **m, double *v, int i, uint pivo, int n) {
 	double aux_m, aux_v;
 

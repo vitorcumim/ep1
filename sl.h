@@ -1,7 +1,8 @@
-//	Nome: Rafael Urbanek Laurentino
-// 	GRR: 20224381
-// 	Nome: Vitor Lorenzo Cumim
-// 	GRR: 20224757
+/*	Nome: Rafael Urbanek Laurentino
+*	GRR: 20224381
+*	Nome: Vitor Lorenzo Cumim
+*	GRR: 20224757 
+*/
 
 #ifndef __SL_H__
 #define __SL_H__
@@ -23,8 +24,8 @@ void le_sl(double ***m, double **v, int *n);
 // Copia o vetor v para o vetor vx.
 void copia_vetor(double *v,double *vx,int n);
 
-// Aloca e copia o vetor v para o vetor vx (DEBUG).
-void criacopia_vetor(double *v, double **vx, int n); //DEBUG
+// Aloca e copia o vetor v para o vetor vx.
+void criacopia_vetor(double *v, double **vx, int n);
 
 // Aloca e copia a matriz m para a matriz mx (DEBUG).
 void criacopia_matriz(double **m, double ***mx, int n); //DEBUG
@@ -50,10 +51,10 @@ void destroi_vetor(double *v); //DEBUG
 // Libera a memória usada por uma matriz (DEBUG).
 void destroi_matriz(double **m, int n); //DEBUG
 
-// Libera a memória usada por um sistema linear (uma matriz e um vetor). 
+// Libera a memória usada por um sistema linear, uma matriz(m) e um vetor(v). 
 void destroi_sl(double **m, double *v, int n); 
 
-// Libera toda a memória utilizada para cada método.
+// Libera a memória utilizada por um silstema linear (m,v) e dois vetore.
 void destroi_tudo(double **m, double *v, double *residuo, double *resultado, int n);
 
 // Imprime uma matriz (DEBUG).

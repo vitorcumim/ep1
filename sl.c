@@ -1,7 +1,8 @@
-//	Nome: Rafael Urbanek Laurentino
-// 	GRR: 20224381
-// 	Nome: Vitor Lorenzo Cumim
-// 	GRR: 20224757
+/*	Nome: Rafael Urbanek Laurentino
+*	GRR: 20224381
+*	Nome: Vitor Lorenzo Cumim
+*	GRR: 20224757 
+*/
 
 #include "sl.h"
 
@@ -49,7 +50,7 @@ void copia_vetor(double *v,double *vx,int n) {
 	}
 }
 
-// Aloca e copia o vetor v para o vetor vx (DEBUG).
+// Aloca e copia o vetor v para o vetor vx.
 void criacopia_vetor(double *v, double **vx, int n) {
 	*vx = aloca_vetor(n);
 
@@ -92,7 +93,7 @@ void calculaResiduo(double **m, double *v, double *resultado, double *residuo, i
 	}
 }
 
-// Coloca as três diagonais da matriz tridiagonal em vetores.
+// Coloca as três diagonais da matriz tridiagonal em vetores, diagonal principal = d; diagonal inferior = a; diagonal superior = c.
 void gera_vetores3d(double **m, double *a, double *d, double *c, int n) {
 
     for (int i = 0; i < n; i++)							// A diagonal principal está na diagonal 0
@@ -130,7 +131,7 @@ void imprimeresultado(double *resultado, double *residuo, double tempo, int n) {
 	
 	for (int i = 0; i < n; i++)
 		printf("%.12lf ",residuo[i]);
-	printf("\n");
+	printf("\n\n\n");
 }
 
 // Libera a memória usada por um vetor (DEBUG).
@@ -148,7 +149,7 @@ void destroi_matriz(double **m, int n) {
 	free(m);
 }
 
-// Libera a memória usada por um sistema linear (uma matriz e um vetor).
+// Libera a memória usada por um sistema linear, uma matriz(m) e um vetor(v). 
 void destroi_sl(double **m, double *v, int n) {
 
 	for(int i = 0; i < n; i++)
@@ -158,7 +159,7 @@ void destroi_sl(double **m, double *v, int n) {
 	free(v);
 }
 
-// Libera toda a memória utilizada para cada método.
+// Libera a memória utilizada por um silstema linear (m,v) e dois vetore.
 void destroi_tudo(double **m, double *v, double *residuo, double *resultado, int n) {
 
 	destroi_sl(m,v,n);

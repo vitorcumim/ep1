@@ -1,7 +1,8 @@
-//	Nome: Rafael Urbanek Laurentino
-// 	GRR: 20224381
-// 	Nome: Vitor Lorenzo Cumim
-// 	GRR: 20224757
+/*	Nome: Rafael Urbanek Laurentino
+*	GRR: 20224381
+*	Nome: Vitor Lorenzo Cumim
+*	GRR: 20224757 
+*/
 
 #include "gs3d.h"
 #include <likwid.h>
@@ -45,10 +46,10 @@ void gs3d(double **m, double *v, int n) {
     gaussSeidel3d(d,a,c,v,resultado,n,&it);
     tempo = timestamp() - tempo;
     LIKWID_MARKER_STOP("GS_3_diagonal");
-    calculaResiduo(m,v,resultado,residuo,n);
+    calculaResiduo(m,v,resultado,residuo,n);				// Calcula o resíduo.
     printf("GS 3-diagonal [ %d iterações ]:\n",it);
     imprimeresultado(resultado,residuo,tempo,n);			// Imprime os resultados.
-    destroi_vetor(a);										// Libera toda a memória usada.			
+    destroi_vetor(a);										// Libera toda a memória usada pelos vetore a, d, c .			
 	destroi_vetor(d);
 	destroi_vetor(c);
     destroi_vetor(residuo);									// Libera a memória utilizada pelo vetor resíduo.
