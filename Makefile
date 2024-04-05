@@ -11,7 +11,7 @@ CC = gcc
 
 # arquivos-objeto
 	objects = perfSl.o sl.o eg.o gs.o eg3d.o gs3d.o utils.o
-	fonte = ! -name '*.c' ! -name 'Makefile' ! -name 'README' ! -name '*.h'    
+	fonte = ! -name '*.c' ! -name 'Makefile' ! -name 'README' ! -name '*.h' ! -name '*.bash'  
      
 perfSl: $(objects)
 	$(CC) $(objects) -o $(all) $(LIKWID_LIB) -lm

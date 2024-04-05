@@ -16,6 +16,8 @@ output=$(likwid-perfctr -C 7 -g FLOPS_DP -m ./perfSl)
 # Filtra a saída até a parte desejada usando grep
 filtered_output=$(echo "$output" | sed -n '/Region/q;p')
 
+filtered_output=$(echo "$filtered_output" | tail -n +5)
+
 grep_dp_output=$(echo "$output" | grep DP | grep -v AVX)
 
 echo "$filtered_output"

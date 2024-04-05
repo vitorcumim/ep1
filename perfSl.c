@@ -21,10 +21,13 @@ int main() {
 	le_sl(&m,&v,&n);				// Passa por referência o sistema linear, aloca espaço na memória e lê logo em seguida.
 	
 	eg(m,v,n);						// Executa a eliminação de gauss para o sistema linear.
+	printf("\n");
 
 	gs(m,v,n);						// Executa o método de gauss seidel para um sistema linear.
-	
+	printf("\n");
+
 	eg3d(m,v,n);					// Executa a eliminação de gauss para uma sistema tridiagonal.
+	printf("\n");
 	
 	gs3d(m,v,n);					// Executa o método de gauss seidel para um sistema tridiagoal.
 

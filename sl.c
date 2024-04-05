@@ -131,7 +131,7 @@ void imprimeresultado(double *resultado, double *residuo, double tempo, int n) {
 	
 	for (int i = 0; i < n; i++)
 		printf("%.12lf ",residuo[i]);
-	printf("\n\n\n");
+	printf("\n");
 }
 
 // Libera a memória usada por um vetor (DEBUG).
