@@ -14,7 +14,7 @@
 int main() {
 	double **m;						// Define duas variáveis, uma matriz(m) e um vetor(v) para compor um sistema linear.
 	double *v;
-	int n; 							// Define uma variável para o grau so sitema;
+	int n; 							// Define uma variável para o grau do sitema;
 	
 	LIKWID_MARKER_INIT;
 

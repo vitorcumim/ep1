@@ -9,7 +9,7 @@
 
 #include "sl.h"
 
-// Função principal utilizada na main(perfSl) calcula os resultado utilizando o método de Gauss Seidel para uma matriz tridiagonal e imprime.
+// Função principal utilizada na main(perfSl) resolve o sistema linear (m,v) de grau n tridiagonal utilizando o método de Gauss Seidel e imprime.
 void gs3d(double **m, double *v, int n);
 
 #endif // __GS3D_H__

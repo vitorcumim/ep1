@@ -9,7 +9,7 @@
 
 #include "sl.h"
 
-// Função principal utilizada na main(perfSl) calcula os resultado utilizando o método de Gauss Seidel e imprime.
+// Função principal utilizada na main(perfSl) resolve o sistema linear (m,v) de grau n utilizando o método de Gauss Seidel e imprime.
 void gs(double **m, double *v, int n);
 
 #endif // __GS_H__

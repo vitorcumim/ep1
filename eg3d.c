@@ -7,7 +7,9 @@
 #include "eg3d.h"
 #include <likwid.h>
 
-// Realiza a retrosubstituição na "matriz"(vetores d, c) tridiagonal.
+// NESSA BIBLIOTECA, EM TODAS FUNÇÕES, N SE REFERE AO GRAU DA MATRIZ.
+
+// Realiza a retrosubstituição no "sistema linear"(d,c,v) tridiagonal.
 void retrosub3d(double *d, double*c, double *v, double *resultado, int n) {
 	
 	resultado[n-1] = v[n-1] / d[n-1];
@@ -15,7 +17,7 @@ void retrosub3d(double *d, double*c, double *v, double *resultado, int n) {
 		resultado[i] = (v[i] - c[i] * resultado[i+1]) / d[i];
 }
 
-// Realiza a triangularizção da "matriz"(vetores a, d, c) tridiagonal.
+// Realiza a triangularizção do "sistema linear"(d,a,c,v) tridiagonal.
 void triangulariza3d(double *d, double *a, double *c, double *v, int n) {
 
 	for (int i = 0; i < n-1; ++i) {
@@ -26,13 +28,13 @@ void triangulariza3d(double *d, double *a, double *c, double *v, int n) {
 	}
 }
 
-// Função principal utilizada na main(perfSl). Triangulariza a "matriz"(vetores), em seguida faz a retrosubstituição.
+// Função principal utilizada na main(perfSl). Triangulariza o sitema linear(m,v) de grau n tridiagonal, em seguida faz a retrosubstituição.
 void eg3d(double **m, double *v, int n) {
 	double *a, *d, *c, *resultado, *residuo, *vx;
 	double tempo;
 
 	a = aloca_vetor(n-1);									// Aloca memória para os vetores da matriz tridiagonal.
-	d = aloca_vetor(n);
+	d = aloca_vetor(n);										// d = diagonal principa, c = diagonal superio, a = diagonal inferior.
 	c = aloca_vetor(n-1);
 	criacopia_vetor(v,&vx,n);								// Aloca e copia o vetor de resultados do sitema linear para um vetor auxiliar.
 	
@@ -54,19 +56,7 @@ void eg3d(double **m, double *v, int n) {
 	destroi_vetor(a);										// Libera toda a memória usada.			
 	destroi_vetor(d);
 	destroi_vetor(c);
+	destroi_vetor(vx);
 	destroi_vetor(residuo);
 	destroi_vetor(resultado);
 }
-
-/*int main() {
-	double **m;
-	double *v;
-	int n;
-	
-	le_sl(&m,&v,&n);
-	
-	eg3d(m,v,n);
-
-	destroi_sl(m,v,n);
-	return 0;
-}*/

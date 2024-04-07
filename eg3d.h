@@ -9,7 +9,7 @@
 
 #include "sl.h"
 
-// Função principal utilizada na main(perfSl). Triangulariza a "matriz"(vetores), em seguida faz a retrosubstituição.
+// Função principal utilizada na main(perfSl). Triangulariza o sitema linear(m,v) de grau n tridiagonal, em seguida faz a retrosubstituição.
 void eg3d(double **m, double *v, int n);
 
 #endif // __EG3D_H__

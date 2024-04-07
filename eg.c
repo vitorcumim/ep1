@@ -7,7 +7,9 @@
 #include "eg.h"
 #include <likwid.h>
 
-// Realiza a retrosubstituição em uma matriz triangularizada.
+// NESSA BIBLIOTECA, EM TODAS FUNÇÔES, N SE REFERE AO GRAU DA MATRIZ.
+
+// Realiza a retrosubstituição em um sitema linear(m,v) triangularizado, e preenche o vetor resultado.
 void retrosub(double **m, double *v, double *resultado, int n) {
 	
 	for (int i = n-1; i >= 0; --i) {
@@ -32,8 +34,8 @@ unsigned int encontra_max(double **m, int i, int n) {
 	return linha;						// retorna a linha que deve ser trocada com a linha do pivo.
 }
 
-// Troca a linha i pela linha pivo de uma matriz.
-void troca_linha(double **m, double *v, int i, uint pivo, int n) {
+// Troca a linha i pela linha pivo de um sitema linear(m,v).
+void troca_linha(double **m, double *v, int i, int pivo, int n) {
 	double aux_m, aux_v;
 
 	for (int j = 0; j < n; j++) {
@@ -46,26 +48,26 @@ void troca_linha(double **m, double *v, int i, uint pivo, int n) {
 	v[pivo] = aux_v;
 }
 
-// Realiza o pivoteamento e a triangularizção da matriz.
+// Realiza o pivoteamento e a triangularizção do sistema linear(m,v).
 void triangulariza(double **m, double *v, int n) {
 
-	for (int i = 0; i < n; ++i) {
-			uint pivo = encontra_max(m,i,n);
-			if(i != pivo)									// Pivoteamento.
+	for (int i = 0; i < n; ++i) {							// Pivoteamento.
+			int pivo = encontra_max(m,i,n);
+			if(i != pivo)
 				troca_linha(m,v,i,pivo,n);
 
-			for(int k = i+1; k < n; k++) {
+			for(int k = i+1; k < n; k++) {					// Triangularização.
 				double c = m[k][i] / m[i][i];
-				m[k][i] = 0.0;								// Triangularização.
+				m[k][i] = 0.0;
 				for (int j = i+1; j < n; ++j) {
 					m[k][j] -= m[i][j] * c;
 				}
 				v[k] -= v[i] * c;
 			}
-		}	
+		}
 }
 
-// Função principal utilizada na main(perfSl). Triangulariza a matriz, em seguida faz a retrosubstituição e imprime os resultados.
+// Função principal utilizada na main(perfSl). Triangulariza o sistema linear(m,v) de grau n em seguida faz a retrosubstituição e imprime o resultado e o resíduo.
 void eg(double **m, double *v, int n) {
 	double **mx; 
 	double *vx, *resultado, *residuo;
@@ -83,21 +85,8 @@ void eg(double **m, double *v, int n) {
 	retrosub(mx,vx,resultado,n);
 	tempo = timestamp() - tempo;
 	LIKWID_MARKER_STOP("EG_clássico");
-	calculaResiduo(m,v,resultado,residuo,n);				// Calcula os resíduos
+	calculaResiduo(m,v,resultado,residuo,n);				// Calcula os resíduos.
 	printf("EG clássico:\n");
 	imprimeresultado(resultado,residuo,tempo,n);			// Imprime os resultados.
 	destroi_tudo(mx,vx,resultado,residuo,n);				// Libera toda memória utilizada.
 }
-
-/*int main() {
-	double **m;
-	double *v;
-	int n; 
-	
-	le_sl(&m,&v,&n);
-	
-	eg(m,v,n);
-	
-	destroi_sl(m,v,n);
-	return 0;
-}*/

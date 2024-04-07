@@ -7,13 +7,17 @@
 #include "gs.h"
 #include <likwid.h>
 
-// Função que executa o método de Gauss Seidel.
-void gaussSeidel(double **m, double *v, double *resultado, uint n, int *it) {
+// O VALOR TOL(TOLERÂNCIA DO ERRO) ESTÀ DEFINIDO NA BIBLIOTECA "utils.h".
+
+// NESSA BIBLIOTECA, EM TODAS FUNÇÔES, N SE REFERE AO GRAU DA MATRIZ.
+
+// Função que executa o método de Gauss Seidel para o sistema linear (m,v), preeche o vetor resultado e altera o número de iterações(it).
+void gaussSeidel(double **m, double *v, double *resultado, int n, int *it) {
 	double *ex_resultado, s, erro = 1 + TOL;
 	int j;
 
-	ex_resultado = aloca_vetor(n);
-	memset(ex_resultado,0,n*sizeof(double));
+	ex_resultado = aloca_vetor(n);							// Aloca um vetor para guardar os resultados das iterações (k-1).
+	memset(ex_resultado,0,n*sizeof(double));				// No início a interação (k-1) é nula = vetor de zeros.
 
 	while (erro > TOL && (*it) < 50) {
 		for (int i = 0; i < n; ++i) {
@@ -23,15 +27,14 @@ void gaussSeidel(double **m, double *v, double *resultado, uint n, int *it) {
 			}
 			resultado[i] = (v[i] - s) / m[i][i];
 		}
-		erro = calculaErro(resultado,ex_resultado,n);
+		erro = calculaErro(resultado,ex_resultado,n);		// Calcula o erro com base na iteração atual(k) e na anterior(k-1).
 		(*it) ++;
-	}
-	
+	}	
 	destroi_vetor(ex_resultado);
 }
 
-// Função principal utilizada na main(perfSl) calcula os resultado utilizando o método de Gauss Seidel e imprime.
-void gs(double **m, double *v, int n) { 
+// Função principal utilizada na main(perfSl) resolve o sistema linear (m,v) de grau n utilizando o método de Gauss Seidel e imprime.
+void gs(double **m, double *v, int n) {
 	double *resultado, *residuo;
 	double tempo;
 	int it = 0;
@@ -52,16 +55,3 @@ void gs(double **m, double *v, int n) {
 	destroi_vetor(residuo);									// Libera a memória usa por resíduo.
 	destroi_vetor(resultado);								// Libera a memória usa por resultado.
 }
-
-/*int main() {
-	double **m;
-	double *v;
-	int n; 
-	
-	le_sl(&m,&v,&n);
-	
-	gs(m,v,n);
-	
-	destroi_sl(m,v,n);
-	return 0;
-}*/

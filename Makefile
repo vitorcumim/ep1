@@ -1,8 +1,9 @@
+# flags para compilação do likwid.
 LIKWID = /home/soft/likwid
 LIKWID_FLAGS = -I$(LIKWID)/include
 LIKWID_LIB = -L${LIKWID}/lib -llikwid
 
-
+# falgs de compilação.
 CFLAGS = -Wall -O0 -DLIKWID_PERFMON $(LIKWID_FLAGS) -g # flags de compilacao 
 CC = gcc
 

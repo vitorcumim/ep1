@@ -6,6 +6,8 @@
 
 #include "sl.h"
 
+// NESSA BIBLIOTECA, EM TODAS FUNÇÔES, N SE REFERE AO GRAU DA MATRIZ.
+
 // Aloca espaço na memória para um vetor com tamanho n.
 double *aloca_vetor(int n) {
 	double *v;
@@ -83,7 +85,7 @@ void criacopia_sl(double **m, double ***mx, double *v, double **vx, int n) {
 	}
 }
 
-// Calcula resíduo baseado na formula residuo = m * resultado - v.
+// Calcula resíduo baseado na fórmula (resíduo = m * resultado - v).
 void calculaResiduo(double **m, double *v, double *resultado, double *residuo, int n) {
 
 	for (int i = 0; i < n ; i++) {
@@ -96,13 +98,13 @@ void calculaResiduo(double **m, double *v, double *resultado, double *residuo, i
 // Coloca as três diagonais da matriz tridiagonal em vetores, diagonal principal = d; diagonal inferior = a; diagonal superior = c.
 void gera_vetores3d(double **m, double *a, double *d, double *c, int n) {
 
-    for (int i = 0; i < n; i++)							// A diagonal principal está na diagonal 0
+    for (int i = 0; i < n; i++)							// Diagonal principal.
         d[i] = m[i][i];
 
-    for (int i = 0; i < n-1; i++)					 	// A primeira diagonal superior está na diagonal 1
+    for (int i = 0; i < n-1; i++)					 	// Diagonal superior.
         c[i] = m[i][i+1];
 
-    for (int i = 0; i < n-1; i++)						 // A primeira diagonal inferior está na diagonal -1
+    for (int i = 0; i < n-1; i++)						// Diagonal inferior.
         a[i] = m[i+1][i];
 }
 
@@ -110,7 +112,7 @@ void gera_vetores3d(double **m, double *a, double *d, double *c, int n) {
 double calculaErro(double *resultado, double *ex_resultado, int n) {
 	double diff, maior = 0.0;
 	
-	for (int i = 0; i < n; i++) {							// Encontra o maior erro aproximado.
+	for (int i = 0; i < n; i++) {							// Encontra o maior erro aproximado comparando os vetores da iteração k e k-1.
 		diff = ABS(resultado[i] - ex_resultado[i]);
 		if (maior < diff)
 			maior = diff;
@@ -149,7 +151,7 @@ void destroi_matriz(double **m, int n) {
 	free(m);
 }
 
-// Libera a memória usada por um sistema linear, uma matriz(m) e um vetor(v). 
+// Libera a memória usada por um sistema linear, uma matriz(m) e um vetor(v).
 void destroi_sl(double **m, double *v, int n) {
 
 	for(int i = 0; i < n; i++)
@@ -159,7 +161,7 @@ void destroi_sl(double **m, double *v, int n) {
 	free(v);
 }
 
-// Libera a memória utilizada por um silstema linear (m,v) e dois vetore.
+// Libera a memória utilizada por um sistema linear (m,v) e os vetores de resultado e resíduo.
 void destroi_tudo(double **m, double *v, double *residuo, double *resultado, int n) {
 
 	destroi_sl(m,v,n);
@@ -167,7 +169,7 @@ void destroi_tudo(double **m, double *v, double *residuo, double *resultado, int
 	destroi_vetor(resultado);
 }
 
-// Imprime uma matriz (DEBUG).
+// Imprime uma matriz(m) (DEBUG).
 void imprime_matriz(double **m, int n) {
 	
 	printf("matriz:\n");
@@ -177,26 +179,3 @@ void imprime_matriz(double **m, int n) {
 			printf("\n");
 		}
 }
-
-/*void main(){
-	double **m, **mx;
-	double *v, *vx, *residuo, *resultado;
-	int n;
-
-	le_sl(&m,&v,&n);
-	criacopia_sl(m,&mx,v,&vx,n);
-	criacopia_vetor(v,&residuo,n);
-	criacopia_vetor(v,&resultado,n);
-
-	//imprimir copia do Sistem linear
-	printf("Copia do sistema linear:\n");
-	for (int i = 0; i < n; i++) {
-		for (int j = 0; j < n; j++)
-			printf("%lf ",mx[i][j]);
-		printf("%lf\n",vx[i]);
-	}
-	
-	imprimeresultado(vx,v,0,n);
-	destroi_sl(mx,vx,n);
-	destroi_tudo(m,v,residuo,resultado,n);
-}*/

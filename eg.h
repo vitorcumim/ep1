@@ -9,7 +9,7 @@
 
 #include "sl.h"
 
-// Função principal utilizada na main(perfSl). Triangulariza a matriz, em seguida faz a retrosubstituição e imprime os resultados.
+// Função principal utilizada na main(perfSl). Triangulariza o sistema linear(m,v) de grau n em seguida faz a retrosubstituição e imprime o resultado e o resíduo.
 void eg(double **m, double *v, int n);
 
 #endif // __EG_H__

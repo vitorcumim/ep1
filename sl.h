@@ -12,6 +12,8 @@
 #include <string.h>
 #include "utils.h"
 
+// NESSA BIBLIOTECA, EM TODAS FUNÇÔES, N SE REFERE AO GRAU DA MATRIZ.
+
 // Aloca espaço na memória para um vetor com tamanho n.
 double *aloca_vetor(int n);
 
@@ -33,7 +35,7 @@ void criacopia_matriz(double **m, double ***mx, int n); //DEBUG
 // Aloca e copia o sistema linear (m,v) para o sistema linear (mx,vx).
 void criacopia_sl(double **m, double ***mx, double *v, double **vx, int n);
 
-// Calcula resíduo baseado na formula residuo = m * resultado - v.
+// Calcula resíduo baseado na fórmula (resíduo = m * resultado - v).
 void calculaResiduo(double **m, double *v, double *resultado, double *residuo, int n);
 
 // Coloca as três diagonais da matriz tridiagonal em vetores, diagonal principal = d; diagonal inferior = a; diagonal superior = c.
@@ -54,10 +56,10 @@ void destroi_matriz(double **m, int n); //DEBUG
 // Libera a memória usada por um sistema linear, uma matriz(m) e um vetor(v). 
 void destroi_sl(double **m, double *v, int n); 
 
-// Libera a memória utilizada por um silstema linear (m,v) e dois vetore.
+// Libera a memória utilizada por um sistema linear (m,v) e os vetores de resultado e resíduo.
 void destroi_tudo(double **m, double *v, double *residuo, double *resultado, int n);
 
-// Imprime uma matriz (DEBUG).
+// Imprime uma matriz(m) (DEBUG).
 void imprime_matriz(double **m, int n); //DEBUG
 
 #endif // __SL_H__

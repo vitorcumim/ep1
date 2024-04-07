@@ -5,7 +5,7 @@
 #include <time.h>
 #include <sys/time.h>
 
-// Valor de tolerância do erro.
+// Valor da tolerância do erro.
 #define TOL 1e-4
 
 // Valor absoluto de um número. Alternativa ao uso da função 'fabs()'
