@@ -1,3 +1,8 @@
+#	Nome: Rafael Urbanek Laurentino
+#	GRR: 20224381
+#	Nome: Vitor Lorenzo Cumim
+#	GRR: 20224757 
+
 # flags para compilação do likwid.
 LIKWID = /home/soft/likwid
 LIKWID_FLAGS = -I$(LIKWID)/include

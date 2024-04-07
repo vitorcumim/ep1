@@ -5,6 +5,9 @@
 #include <time.h>
 #include <sys/time.h>
 
+// Define o valor maximo de iterações.
+#define MAXIT 50
+
 // Valor da tolerância do erro.
 #define TOL 1e-4
 

@@ -7,7 +7,7 @@
 #include "gs3d.h"
 #include <likwid.h>
 
-// O VALOR TOL(TOLERÂNCIA DO ERRO) ESTÀ DEFINIDO NA BIBLIOTECA "utils.h".
+// O VALOR TOL(TOLERÂNCIA DO ERRO) E MAXIT(MÁXIMO DE ITERAÇÔES) ESTÃO DEFINIDOS NA BIBLIOTECA "utils.h".
 
 // NESSA BIBLIOTECA, EM TODAS FUNÇÔES, N SE REFERE AO GRAU DA MATRIZ.
 
@@ -18,7 +18,7 @@ void gaussSeidel3d(double *d, double *a, double *c, double *v, double *resultado
  	ex_resultado = aloca_vetor(n);							// Aloca um vetor para guardar os resultados das iterações (k-1).
  	memset(ex_resultado,0,n*sizeof(double));				// No início a interação (k-1) é nula = vetor de zeros.
 
- 	while (erro > TOL && (*it) < 50) {
+ 	while (erro > TOL && (*it) < MAXIT) {
  		resultado[0] = (v[0] - c[0] * resultado[1]) / d[0];
  		for (int i = 1; i < n-1; ++i)
  			resultado[i] = (v[i] - a[i-1] * resultado[i-1] - c[i] * resultado[i+1]) / d[i];
