@@ -1,0 +1,14 @@
+Nome: Rafael Urbanek Laurentino
+GRR: 20224381
+Nome: Vitor Lorenzo Cumim
+GRR: 20224757 
+
+- script.bash:
+	*modo de utilização:
+    	O script é executado passando um número como argumento referente ao core desejado para realizar as medições do likwid.
+
+	*funcionamento:
+	    Primeiramente o scrip verifica se o argumento "$core" existe, caso contrario ele exibe a mensagem "Uso: $0 <núcleo desejado para medições do likwid" se referindo a forma correta de usar o script. Então é verificado a existência do arquivo “perfSl” dentro do diretório corrente caso o arquivo não exista, será executada uma chamada “make” que fará com que o Makefile compile e gere o executável e os arquivos objetos, depois disso o programa likwid-perfctr é chamado com os argumentos -C (que indica em qual core do processador o programa deve ser rodado) usando a variavel "$core" definida anteriomente, -g FLOPS_DP sendo FLOPS_DP a operção que queremos calcular com o likwid, nesse caso o número de operações em ponto flutuante usadas para cada método de resolução de sistemas lineares e por fim -m ./perfSl sendo perfSl o nome do programa a ser chamado e analisado, depois de chamar a função o script armazena a sua saída na variável output e faz tratamentos nesta saída, sendo os dois primeiros usando as funções sed e tail para “recortar” a saída original do programa perfSl, depoi disso ele manipula output com a função grep para exibir  todas as linhas que tenham DP impresso menos as linhas que tenham AVX, e por fim o script imprime as saída do perfSl (filtered_output) e a saída do grep (grep_dp_output) de forma concatenada.
+
+- DEBUG:
+	Algumas funções da biblioteca sl.c estão comentadas como DEBUG, essa funções não são usadas no codigo, elas existem pois foram usadas para debugar o codigo e foram deixas pois acreditamos na sua utilidade futura.

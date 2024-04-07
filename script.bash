@@ -7,7 +7,7 @@
 
 # Verifica se o argumento 1 existe.
 if [ $# -ne 1 ]; then
-    echo "Uso: $0 <núcleo>"
+    echo "Uso: $0 <núcleo desejado para medições do likwid>"
     exit 1
 fi
 # Define o arguento 1 como o core desejado para usar o likwid.
@@ -18,8 +18,8 @@ if [ -e "perfSl" ]; then
     echo "O arquivo perfSl já existe."
 else
     echo "O arquivo perfSl não existe. Executando o comando make..."
-    # Executa o comando make.
-    make
+    # Executa o comando make e descarta sua saída.
+    make > /dev/null 
 fi
 
 # Executa o comando likwid-perfctr com os parâmetros fornecidos.
